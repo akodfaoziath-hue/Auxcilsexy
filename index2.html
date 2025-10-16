@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Réserver — Auxcilsexy</title>
+  <meta name="description" content="Réservez votre rendez-vous Auxcilsexy via WhatsApp. Extensions de cils professionnelles à Agla." />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #ffe6f0;
+      --card: #fff;
+      --text: #222;
+      --muted: #666;
+      --accent: #ff6fa3;
+      --accent-2: #ffb6cf;
+      --radius: 14px;
+      --shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Barre du haut */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(90deg, #ff6fa3, #ffb6cf);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow);
+      z-index: 1000;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 45px;
+      height: 45px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Pacifico', cursive;
+      font-size: 22px;
+      color: var(--accent);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .brand h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 28px;
+      color: white;
+      margin: 0;
+    }
+
+    /* Conteneur principal */
+    .container {
+      max-width: 480px;
+      margin: 100px auto 40px; /* espace pour la barre */
+      padding: 20px;
+    }
+
+    .panel {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 30px 24px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-2px);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 34px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ff6fa3, #ffb6cf);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 26px;
+    }
+
+    form .field {
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    form label {
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    form input, form textarea, form select {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.08);
+      font-size: 15px;
+      transition: border 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    form input:focus,
+    form textarea:focus,
+    form select:focus {
+      border: 1px solid var(--accent);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255,111,163,0.2);
+    }
+
+    .btn {
+      background: var(--accent);
+      color: white;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      transition: background 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #e85c95;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 520px) {
+      .panel { padding: 20px; }
+      h1 { font-size: 26px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Barre de navigation -->
+  <header>
+    <div class="brand">
+      <div class="brand-logo">A</div>
+      <h1>Auxcilsexy</h1>
+    </div>
+  </header>
+
+  <!-- Contenu -->
+  <div class="container">
+    <div class="panel">
+      <h1>Réserver un rendez-vous</h1>
+
+      <form id="bookingForm" onsubmit="return sendToWhatsApp(event)">
+        <div class="field">
+          <label for="name">Nom (optionnel)</label>
+          <input type="text" id="name" placeholder="Votre nom" />
+        </div>
+
+        <div class="field">
+          <label for="date">Date souhaitée (optionnel)</label>
+          <input type="date" id="date" />
+        </div>
+
+        <div class="field">
+          <label for="service">Prestation <span style="color: var(--accent); font-weight: 700;">(obligatoire)</span></label>
+          <select id="service" required>
+            <option value="" disabled selected>Choisissez une prestation</option>
+            <option value="Classic — 10 000 F">Classic — 10 000 F</option>
+            <option value="Hybride — 16 000 F">Hybride — 16 000 F</option>
+            <option value="Mixte — 20 000 F">Mixte — 20 000 F</option>
+            <option value="Volume — 25 000 F">Volume — 25 000 F</option>
+            <option value="Méga Volume — 30 000 F">Méga Volume — 30 000 F</option>
+            <option value="Dépose — 5 000 F">Dépose — 5 000 F</option>
+            <option value="Remplissage — 10 000 F">Remplissage — 10 000 F</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="note">Précisions (ex: matin/après-midi)</label>
+          <textarea id="note" rows="2" placeholder="Ex : matin, après-midi, préférence de styliste..."></textarea>
+        </div>
+
+        <button type="submit" class="btn">Prendre rendez-vous via WhatsApp</button>
+      </form>
+
+      <p class="note">WhatsApp : +229 01 96 07 22 19</p>
+      <a class="back-link" href="index.html">← Retour à la page principale</a>
+    </div>
+  </div>
+
+  <!-- Script WhatsApp -->
+  <script>
+    const WA_NUMBER = '+2290196072219';
+
+    function isMobile() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    function sendToWhatsApp(e) {
+      e.preventDefault();
+
+      const service = document.getElementById('service').value;
+      const name = document.getElementById('name').value.trim();
+      const date = document.getElementById('date').value;
+      const note = document.getElementById('note').value.trim();
+
+      if (!service) {
+        alert('Veuillez choisir une prestation.');
+        return false;
+      }
+
+      let message = "Bonjour 💕, je souhaite prendre rendez-vous chez Auxcilsexy.%0A";
+      message += "📌 Prestation : " + service + "%0A";
+      if (name) message += "👤 Nom : " + name + "%0A";
+      if (date) message += "📅 Date souhaitée : " + date + "%0A";
+      if (note) message += "📝 Précisions : " + note + "%0A";
+      message += "Merci !";
+
+      const phoneNumber = WA_NUMBER.replace(/\D/g, '');
+
+      let link = "";
+
+      if (isMobile()) {
+        // Sur mobile, ouvrir avec le protocole whatsapp://
+        link = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+        window.location.href = link;
+      } else {
+        // Sur desktop, ouvrir WhatsApp Web dans un nouvel onglet
+        link = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(link, '_blank');
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>
