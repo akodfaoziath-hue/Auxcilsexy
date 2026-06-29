@@ -3,251 +3,370 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Réserver — Auxcilsexy</title>
-  <meta name="description" content="Réservez votre rendez-vous Auxcilsexy via WhatsApp. Extensions de cils professionnelles à Agla." />
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter&display=swap" rel="stylesheet" />
+  <title>Réserver votre rendez-vous — Auxcilsexy</title>
+  <meta name="description" content="Réservez votre rendez-vous Auxcilsexy via WhatsApp en quelques secondes. Extensions de cils professionnelles à Agla, Cotonou." />
+  <meta name="theme-color" content="#e8437a" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%91%81%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
+    /* ===== VARIABLES — identiques à la page d'accueil ===== */
     :root {
-      --bg: #ffe6f0;
-      --card: #fff;
-      --text: #222;
-      --muted: #666;
-      --accent: #ff6fa3;
-      --accent-2: #ffb6cf;
-      --radius: 14px;
-      --shadow: 0 6px 20px rgba(0,0,0,0.12);
+      --rose:       #e8437a;
+      --rose-light: #f7a8c4;
+      --rose-pale:  #fde8f0;
+      --rose-deep:  #b02a57;
+      --gold:       #c79a4b;
+      --cream:      #fff8fb;
+      --dark:       #1a0a10;
+      --muted:      #8a6070;
+      --white:      #ffffff;
+      --line:       rgba(176, 42, 87, 0.12);
+      --shadow-sm:  0 2px 12px rgba(232,67,122,.12);
+      --shadow-md:  0 8px 28px rgba(232,67,122,.18);
+      --shadow-lg:  0 20px 50px rgba(176,42,87,.22);
+      --radius-sm:  12px;
+      --radius-md:  20px;
+      --radius-lg:  28px;
+      --ease: cubic-bezier(.22,.61,.36,1);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      margin: 0;
-      padding: 0;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      padding-bottom: 40px;
     }
 
-    /* Barre du haut */
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+
+    :focus-visible { outline: 2px solid var(--rose-deep); outline-offset: 3px; border-radius: 4px; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulseGlow { 0%,100% { box-shadow: 0 0 0 0 rgba(232,67,122,.4); } 50% { box-shadow: 0 0 0 8px rgba(232,67,122,0); } }
+    @keyframes shimmer { 0% { transform: translateX(-120%) skewX(-20deg); } 100% { transform: translateX(220%) skewX(-20deg); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+    }
+
+    /* ===== HEADER ===== */
     header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(90deg, #ff6fa3, #ffb6cf);
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,248,251,.9); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
       padding: 14px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: var(--shadow);
-      z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
+    .brand { display: flex; align-items: center; gap: 11px; }
     .brand-logo {
-      width: 45px;
-      height: 45px;
-      background: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Pacifico', cursive;
-      font-size: 22px;
-      color: var(--accent);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900;
+      color: var(--white); box-shadow: var(--shadow-sm); animation: pulseGlow 3s infinite;
     }
-
-    .brand h1 {
-      font-family: 'Pacifico', cursive;
-      font-size: 28px;
-      color: white;
-      margin: 0;
+    .brand-name {
+      font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700;
+      background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-
-    /* Conteneur principal */
-    .container {
-      max-width: 480px;
-      margin: 100px auto 40px; /* espace pour la barre */
-      padding: 20px;
+    .home-link {
+      font-size: 13.5px; font-weight: 600; color: var(--rose-deep);
+      display: flex; align-items: center; gap: 6px;
     }
+    .home-link svg { width: 14px; height: 14px; }
 
+    /* ===== CONTAINER ===== */
+    .container { max-width: 540px; margin: 0 auto; padding: 36px 20px 0; }
+
+    .page-intro { text-align: center; margin-bottom: 26px; animation: fadeUp .5s ease both; }
+    .page-intro .eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--rose); display: block; margin-bottom: 10px;
+    }
+    .page-intro h1 {
+      font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 5vw, 2.3rem); font-weight: 700;
+      color: var(--dark); margin-bottom: 10px; line-height: 1.2;
+    }
+    .page-intro p { font-size: 14.5px; color: var(--muted); max-width: 380px; margin: 0 auto; line-height: 1.6; }
+
+    /* ===== CARD ===== */
     .panel {
-      background: var(--card);
-      border-radius: 16px;
-      padding: 30px 24px;
-      box-shadow: var(--shadow);
-      transition: all 0.3s ease;
+      background: var(--white); border-radius: var(--radius-lg); padding: 28px 22px 30px;
+      box-shadow: var(--shadow-md); border: 1px solid var(--line);
+      animation: fadeUp .55s .1s ease both;
     }
 
-    .panel:hover {
-      transform: translateY(-2px);
+    /* ===== STEP LABEL ===== */
+    .step-label {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
+      font-size: 12.5px; font-weight: 700; color: var(--rose-deep); text-transform: uppercase; letter-spacing: .04em;
+    }
+    .step-label .num {
+      width: 22px; height: 22px; border-radius: 50%; background: var(--rose-pale); color: var(--rose-deep);
+      display: flex; align-items: center; justify-content: center; font-size: 12px; font-family: 'Playfair Display', serif; font-weight: 700;
     }
 
-    h1 {
-      text-align: center;
-      font-size: 34px;
-      font-weight: 900;
-      background: linear-gradient(90deg, #ff6fa3, #ffb6cf);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 26px;
+    /* ===== SERVICE CARDS (remplace le <select>) ===== */
+    .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+    .service-option { position: relative; }
+    .service-option input { position: absolute; opacity: 0; pointer-events: none; }
+    .service-option label {
+      display: flex; flex-direction: column; gap: 2px; padding: 13px 14px; border-radius: 13px;
+      border: 1.5px solid var(--line); background: var(--cream); cursor: pointer;
+      transition: border-color .2s, background .2s, transform .15s;
     }
-
-    form .field {
-      margin-bottom: 18px;
-      display: flex;
-      flex-direction: column;
+    .service-option label:hover { border-color: var(--rose-light); transform: translateY(-1px); }
+    .service-option input:checked + label {
+      border-color: var(--rose); background: var(--rose-pale); box-shadow: var(--shadow-sm);
     }
+    .service-option .s-name { font-size: 14px; font-weight: 700; color: var(--dark); }
+    .service-option .s-price { font-size: 13px; font-weight: 700; color: var(--rose); }
+    .service-option .s-dur { font-size: 11px; color: var(--muted); }
+    .service-option input:checked + label .s-name { color: var(--rose-deep); }
 
-    form label {
-      font-size: 14px;
-      margin-bottom: 6px;
-      color: var(--muted);
-      font-weight: 500;
+    .field-error {
+      display: none; font-size: 13px; color: var(--rose-deep); background: var(--rose-pale);
+      border-radius: 10px; padding: 9px 14px; margin: -16px 0 20px; font-weight: 600;
     }
+    .field-error.show { display: block; }
 
-    form input, form textarea, form select {
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(0,0,0,0.08);
-      font-size: 15px;
-      transition: border 0.2s ease, box-shadow 0.2s ease;
+    /* ===== FORM FIELDS ===== */
+    form .field { margin-bottom: 18px; display: flex; flex-direction: column; }
+    form label.field-label { font-size: 13px; margin-bottom: 7px; color: var(--muted); font-weight: 600; }
+    form label.field-label .opt { font-weight: 400; color: var(--muted); opacity: .75; }
+
+    form input[type="text"], form input[type="date"], form textarea {
+      padding: 13px 14px; border-radius: 12px; border: 1.5px solid var(--line);
+      font-size: 15px; font-family: inherit; color: var(--dark); background: var(--cream);
+      transition: border-color .2s, box-shadow .2s, background .2s;
     }
-
-    form input:focus,
-    form textarea:focus,
-    form select:focus {
-      border: 1px solid var(--accent);
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(255,111,163,0.2);
+    form input::placeholder, form textarea::placeholder { color: #b78a98; }
+    form input:focus, form textarea:focus {
+      border-color: var(--rose); outline: none; background: var(--white);
+      box-shadow: 0 0 0 3px rgba(232,67,122,.15);
     }
+    form textarea { resize: vertical; min-height: 64px; }
 
+    /* ===== SUMMARY BAR ===== */
+    .summary {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      background: var(--rose-pale); border-radius: 13px; padding: 13px 16px; margin-bottom: 20px;
+      font-size: 13.5px; color: var(--rose-deep); font-weight: 600;
+    }
+    .summary .summary-price { font-family: 'Playfair Display', serif; font-size: 16px; }
+
+    /* ===== SUBMIT BUTTON ===== */
     .btn {
-      background: var(--accent);
-      color: white;
-      font-weight: 700;
-      border: none;
-      border-radius: 12px;
-      padding: 14px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 16px;
-      transition: background 0.2s ease;
+      background: linear-gradient(135deg, var(--rose), var(--rose-deep)); color: var(--white);
+      font-weight: 700; border: none; border-radius: 14px; padding: 16px; cursor: pointer;
+      width: 100%; font-size: 15.5px; display: flex; align-items: center; justify-content: center; gap: 10px;
+      box-shadow: var(--shadow-md); position: relative; overflow: hidden;
+      transition: transform .2s var(--ease), box-shadow .2s var(--ease);
     }
-
-    .btn:hover {
-      background: #e85c95;
+    .btn::before {
+      content: ''; position: absolute; top: -50%; left: -60%; width: 60%; height: 200%;
+      background: rgba(255,255,255,.22); transform: skewX(-20deg); animation: shimmer 3s infinite;
     }
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .btn:active { transform: translateY(0); }
+    .btn svg { width: 19px; height: 19px; flex-shrink: 0; }
 
     .note {
-      font-size: 13px;
-      color: #666;
-      text-align: center;
-      margin-top: 16px;
+      font-size: 12.5px; color: var(--muted); text-align: center; margin-top: 18px; line-height: 1.6;
     }
+    .note .wa-num { color: var(--rose-deep); font-weight: 700; }
+
+    .trust-row {
+      display: flex; justify-content: center; gap: 18px; margin-top: 22px; flex-wrap: wrap;
+    }
+    .trust-row span {
+      font-size: 11.5px; color: var(--muted); font-weight: 600; display: flex; align-items: center; gap: 5px;
+    }
+    .trust-row svg { width: 13px; height: 13px; color: var(--rose); }
 
     .back-link {
-      display: block;
-      text-align: center;
-      margin-top: 20px;
-      font-size: 14px;
-      color: var(--accent);
-      text-decoration: none;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      margin-top: 26px; font-size: 13.5px; color: var(--rose-deep); font-weight: 600;
     }
+    .back-link:hover { text-decoration: underline; }
+    .back-link svg { width: 13px; height: 13px; }
 
-    .back-link:hover {
-      text-decoration: underline;
+    /* ===== CONFIRMATION TOAST ===== */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--dark); color: var(--white); padding: 13px 22px; border-radius: 50px;
+      font-size: 13.5px; font-weight: 600; box-shadow: var(--shadow-lg); opacity: 0;
+      pointer-events: none; transition: opacity .3s, transform .3s; display: flex; align-items: center; gap: 9px;
+      z-index: 500; white-space: nowrap;
     }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast svg { width: 16px; height: 16px; color: #25D366; }
 
-    @media (max-width: 520px) {
-      .panel { padding: 20px; }
-      h1 { font-size: 26px; }
+    @media (max-width: 380px) {
+      .service-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Barre de navigation -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="icon-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413"/></symbol>
+    <symbol id="icon-arrow-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M19 12H5M11 18l-6-6 6-6"/></symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M12 3l8 3.5v5.6c0 4.6-3.3 7.9-8 9.4-4.7-1.5-8-4.8-8-9.4V6.5L12 3z"/></symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24"><circle fill="none" stroke="currentColor" stroke-width="1.7" cx="12" cy="12" r="9"/><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M12 7v5l3.5 2"/></symbol>
+    <symbol id="icon-check-circle" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 14.4-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4-7 7z"/></symbol>
+  </svg>
+
   <header>
     <div class="brand">
       <div class="brand-logo">A</div>
-      <h1>Auxcilsexy</h1>
+      <span class="brand-name">Auxcilsexy</span>
     </div>
+    <a class="home-link" href="index.html"><svg><use href="#icon-arrow-left"/></svg> Accueil</a>
   </header>
 
-  <!-- Contenu -->
   <div class="container">
-    <div class="panel">
-      <h1>Réserver un rendez-vous</h1>
 
-      <form id="bookingForm" onsubmit="return sendToWhatsApp(event)">
+    <div class="page-intro">
+      <span class="eyebrow">Réservation</span>
+      <h1>Réservez votre rendez-vous</h1>
+      <p>Choisissez votre prestation, ajoutez vos préférences, et envoyez votre demande directement sur WhatsApp.</p>
+    </div>
+
+    <div class="panel">
+      <form id="bookingForm" novalidate>
+
+        <div class="step-label"><span class="num">1</span> Choisissez votre prestation</div>
+
+        <div class="service-grid" id="serviceGrid">
+          <div class="service-option">
+            <input type="radio" name="service" id="svc-classic" value="Classic" data-price="10 000 F" data-dur="~1h30" />
+            <label for="svc-classic"><span class="s-name">Classic</span><span class="s-price">10 000 F</span><span class="s-dur">~1h30</span></label>
+          </div>
+          <div class="service-option">
+            <input type="radio" name="service" id="svc-hybride" value="Hybride" data-price="16 000 F" data-dur="~1h45" />
+            <label for="svc-hybride"><span class="s-name">Hybride</span><span class="s-price">16 000 F</span><span class="s-dur">~1h45</span></label>
+          </div>
+          <div class="service-option">
+            <input type="radio" name="service" id="svc-mixte" value="Mixte" data-price="20 000 F" data-dur="~2h" />
+            <label for="svc-mixte"><span class="s-name">Mixte</span><span class="s-price">20 000 F</span><span class="s-dur">~2h</span></label>
+          </div>
+          <div class="service-option">
+            <input type="radio" name="service" id="svc-volume" value="Volume" data-price="25 000 F" data-dur="~2h15" />
+            <label for="svc-volume"><span class="s-name">Volume</span><span class="s-price">25 000 F</span><span class="s-dur">~2h15</span></label>
+          </div>
+          <div class="service-option">
+            <input type="radio" name="service" id="svc-mega" value="Méga Volume" data-price="30 000 F" data-dur="~2h30" />
+            <label for="svc-mega"><span class="s-name">Méga Volume</span><span class="s-price">30 000 F</span><span class="s-dur">~2h30</span></label>
+          </div>
+          <div class="service-option">
+            <input type="radio" name="service" id="svc-depose" value="Dépose" data-price="5 000 F" data-dur="~30 min" />
+            <label for="svc-depose"><span class="s-name">Dépose</span><span class="s-price">5 000 F</span><span class="s-dur">~30 min</span></label>
+          </div>
+          <div class="service-option">
+            <input type="radio" name="service" id="svc-remplissage" value="Remplissage" data-price="10 000 F" data-dur="~1h" />
+            <label for="svc-remplissage"><span class="s-name">Remplissage</span><span class="s-price">10 000 F</span><span class="s-dur">~1h</span></label>
+          </div>
+        </div>
+
+        <div class="field-error" id="serviceError">Veuillez choisir une prestation pour continuer.</div>
+
+        <div class="step-label"><span class="num">2</span> Vos préférences (facultatif)</div>
+
         <div class="field">
-          <label for="name">Nom (optionnel)</label>
-          <input type="text" id="name" placeholder="Votre nom" />
+          <label class="field-label" for="name">Nom <span class="opt">— optionnel</span></label>
+          <input type="text" id="name" placeholder="Votre nom" autocomplete="name" />
         </div>
 
         <div class="field">
-          <label for="date">Date souhaitée (optionnel)</label>
+          <label class="field-label" for="date">Date souhaitée <span class="opt">— optionnel</span></label>
           <input type="date" id="date" />
         </div>
 
         <div class="field">
-          <label for="service">Prestation <span style="color: var(--accent); font-weight: 700;">(obligatoire)</span></label>
-          <select id="service" required>
-            <option value="" disabled selected>Choisissez une prestation</option>
-            <option value="Classic — 10 000 F">Classic — 10 000 F</option>
-            <option value="Hybride — 16 000 F">Hybride — 16 000 F</option>
-            <option value="Mixte — 20 000 F">Mixte — 20 000 F</option>
-            <option value="Volume — 25 000 F">Volume — 25 000 F</option>
-            <option value="Méga Volume — 30 000 F">Méga Volume — 30 000 F</option>
-            <option value="Dépose — 5 000 F">Dépose — 5 000 F</option>
-            <option value="Remplissage — 10 000 F">Remplissage — 10 000 F</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="note">Précisions (ex: matin/après-midi)</label>
+          <label class="field-label" for="note">Précisions <span class="opt">— optionnel</span></label>
           <textarea id="note" rows="2" placeholder="Ex : matin, après-midi, préférence de styliste..."></textarea>
         </div>
 
-        <button type="submit" class="btn">Prendre rendez-vous via WhatsApp</button>
+        <div class="summary" id="summary" style="display:none">
+          <span id="summaryText">Prestation sélectionnée</span>
+          <span class="summary-price" id="summaryPrice"></span>
+        </div>
+
+        <button type="submit" class="btn">
+          <svg><use href="#icon-whatsapp"/></svg> Envoyer sur WhatsApp
+        </button>
+
+        <div class="trust-row">
+          <span><svg><use href="#icon-shield"/></svg> Hygiène stricte</span>
+          <span><svg><use href="#icon-clock"/></svg> Réponse rapide</span>
+        </div>
+
+        <p class="note">Votre demande sera envoyée au <span class="wa-num">+229 01 96 07 22 19</span> via WhatsApp. Aucun paiement n'est requis pour réserver.</p>
       </form>
 
-      <p class="note">WhatsApp : +229 01 96 07 22 19</p>
-      <a class="back-link" href="index.html">← Retour à la page principale</a>
+      <a class="back-link" href="index.html"><svg><use href="#icon-arrow-left"/></svg> Retour à la page principale</a>
     </div>
+
   </div>
 
-  <!-- Script WhatsApp -->
+  <div class="toast" id="toast"><svg><use href="#icon-check-circle"/></svg> Ouverture de WhatsApp…</div>
+
   <script>
     const WA_NUMBER = '+2290196072219';
+
+    const serviceGrid = document.getElementById('serviceGrid');
+    const summary = document.getElementById('summary');
+    const summaryText = document.getElementById('summaryText');
+    const summaryPrice = document.getElementById('summaryPrice');
+    const serviceError = document.getElementById('serviceError');
+
+    serviceGrid.addEventListener('change', (e) => {
+      const input = e.target;
+      if (input.name !== 'service') return;
+      serviceError.classList.remove('show');
+      summary.style.display = 'flex';
+      summaryText.textContent = input.value + ' · ' + input.dataset.dur;
+      summaryPrice.textContent = input.dataset.price;
+    });
 
     function isMobile() {
       return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-    function sendToWhatsApp(e) {
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.childNodes[1].textContent = ' ' + msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+
+    document.getElementById('bookingForm').addEventListener('submit', function (e) {
       e.preventDefault();
 
-      const service = document.getElementById('service').value;
+      const selected = serviceGrid.querySelector('input[name="service"]:checked');
+      if (!selected) {
+        serviceError.classList.add('show');
+        serviceGrid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return false;
+      }
+
+      const service = selected.value + ' — ' + selected.dataset.price;
       const name = document.getElementById('name').value.trim();
       const date = document.getElementById('date').value;
       const note = document.getElementById('note').value.trim();
-
-      if (!service) {
-        alert('Veuillez choisir une prestation.');
-        return false;
-      }
 
       let message = "Bonjour 💕, je souhaite prendre rendez-vous chez Auxcilsexy.%0A";
       message += "📌 Prestation : " + service + "%0A";
@@ -257,20 +376,22 @@
       message += "Merci !";
 
       const phoneNumber = WA_NUMBER.replace(/\D/g, '');
+      let link = isMobile()
+        ? `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`
+        : `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
-      let link = "";
+      showToast('Ouverture de WhatsApp…');
 
-      if (isMobile()) {
-        // Sur mobile, ouvrir avec le protocole whatsapp://
-        link = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
-        window.location.href = link;
-      } else {
-        // Sur desktop, ouvrir WhatsApp Web dans un nouvel onglet
-        link = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        window.open(link, '_blank');
-      }
+      setTimeout(() => {
+        if (isMobile()) {
+          window.location.href = link;
+        } else {
+          window.open(link, '_blank');
+        }
+      }, 350);
+
       return false;
-    }
+    });
   </script>
 </body>
 </html>
